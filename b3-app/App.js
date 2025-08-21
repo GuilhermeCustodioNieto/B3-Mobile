@@ -1,12 +1,21 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { View, Image, StyleSheet } from "react-native";
+import Splash from "./Splash";
+import Home from "./Home";
+import Infos from "./Infos";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Image style={styles.logo} source={require("./assets/Group 45.png")} />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Infos" component={Infos} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
