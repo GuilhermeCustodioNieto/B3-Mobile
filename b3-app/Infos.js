@@ -9,8 +9,9 @@ import {
   Easing,
 } from "react-native";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import NavBar from "./components/NavBar";
 
-export default function Infos() {
+export default function Infos({ navigation }) {
   // Lista de tópicos com imagens
   const topicos = [
     {
@@ -167,19 +168,7 @@ export default function Infos() {
       </ScrollView>
 
       {/* Barra inferior de navegação */}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-around",
-          paddingVertical: 10,
-          borderTopWidth: 1,
-          borderTopColor: "#3A6BB6",
-        }}
-      >
-        <Ionicons name="home" size={26} color="white" />
-        <Ionicons name="play" size={26} color="white" />
-        <Ionicons name="information-circle" size={26} color="white" />
-      </View>
+      <NavBar navigation={navigation}></NavBar>
     </View>
   );
 }
