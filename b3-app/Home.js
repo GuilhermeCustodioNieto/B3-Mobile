@@ -27,10 +27,20 @@ export default function Home({ navigation }) {
       >
         <Text style={styles.buttonText}>Informações</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.replace("CreateRoom");
+        }}
+      >
         <Text style={styles.buttonText}>Criar sala privada</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.replace("EnterRoom");
+        }}
+      >
         <Text style={styles.buttonText}>Entrar em sala</Text>
       </TouchableOpacity>
       {/* Link para o site */}
