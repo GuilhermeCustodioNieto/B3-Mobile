@@ -2,10 +2,10 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { View } from "react-native-web";
 
-function BlueButton() {
+function BlueButton({ text }) {
   return (
     <TouchableOpacity style={styles.button}>
-      <Text style={styles.buttonText}>Criar sala</Text>
+      <Text style={styles.buttonText}>{text}</Text>
     </TouchableOpacity>
   );
 }

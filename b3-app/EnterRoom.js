@@ -4,8 +4,9 @@ import { View, Image, TouchableOpacity, Text } from "react-native-web";
 import Input from "./components/Input";
 import BlueButton from "./components/BlueButton.js";
 
-function CreateRoom({ navigation }) {
+function EnterRoom({ navigation }) {
   const [nomeSala, setNomeSala] = useState("");
+  const [codigoSala, setCodigoSala] = useState("");
 
   return (
     <View style={styles.container}>
@@ -15,12 +16,18 @@ function CreateRoom({ navigation }) {
         value={nomeSala}
         onChangeText={setNomeSala}
       ></Input>
-      <BlueButton text="Criar sala"></BlueButton>
+
+      <Input
+        label="Código da sala"
+        value={codigoSala}
+        onChangeText={setCodigoSala}
+      ></Input>
+      <BlueButton text="Entrar na sala"></BlueButton>
     </View>
   );
 }
 
-export default CreateRoom;
+export default EnterRoom;
 
 const styles = StyleSheet.create({
   container: {
