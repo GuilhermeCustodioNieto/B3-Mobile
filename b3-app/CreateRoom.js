@@ -44,6 +44,8 @@ function CreateRoom({ navigation }) {
 
   // Cria sala via API
   const createRoom = async () => {
+    console.log(nomeSala);
+    
     if (!nomeSala) return Alert.alert("Erro", "Digite seu nome!");
     try {
       const res = await fetch(`${API_BASE}/api/rooms`, {
