@@ -4,6 +4,7 @@ import { View, Image, StyleSheet } from "react-native";
 import Splash from "./Splash";
 import Home from "./Home";
 import Infos from "./Infos";
+import CreateRoom from "./CreateRoom";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,6 +12,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="CreateRoom" component={CreateRoom} />
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Infos" component={Infos} />
