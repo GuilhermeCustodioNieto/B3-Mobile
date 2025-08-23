@@ -10,8 +10,8 @@ function CreateRoom({ navigation }) {
   const [nomeSala, setNomeSala] = useState("");
   const [stompClient, setStompClient] = useState(null);
 
-  const API_BASE = "https://b3-back-end.onrender.com";
-
+  // const API_BASE = "https://b3-back-end.onrender.com";
+  const API_BASE = "http://localhost:8080";
   // Conecta ao WebSocket
   const connectWebSocket = (code) => {
     const socket = new SockJS(`${API_BASE}/ws`);
@@ -45,7 +45,7 @@ function CreateRoom({ navigation }) {
   // Cria sala via API
   const createRoom = async () => {
     console.log(nomeSala);
-    
+
     if (!nomeSala) return Alert.alert("Erro", "Digite seu nome!");
     try {
       const res = await fetch(`${API_BASE}/api/rooms`, {

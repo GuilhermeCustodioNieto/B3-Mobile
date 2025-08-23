@@ -7,17 +7,20 @@ import {
   Text,
   Alert,
 } from "react-native";
+import BlueButton from "./components/BlueButton";
+import * as Clipboard from "expo-clipboard";
 
 function CopyCode({ route }) {
   const { code } = route.params; // pega o código da sala
 
-  const copyToClipboard = () => {
-    // RN tem lib para copiar texto
-    import("expo-clipboard").then(({ setStringAsync }) => {
-      setStringAsync(code);
-      Alert.alert("Código copiado!", code);
-    });
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync(code);
+    Alert.alert("Código copiado!", code);
   };
+
+  function startQuiz() {
+    // Lógica para começar o quiz
+  }
 
   return (
     <View style={styles.container}>
@@ -36,6 +39,11 @@ function CopyCode({ route }) {
           />
         </TouchableOpacity>
       </View>
+      <BlueButton
+        text="Começar Quiz"
+        onPress={startQuiz}
+        style={styles.startBtn}
+      ></BlueButton>
     </View>
   );
 }
@@ -86,5 +94,8 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginTop: "10%",
     marginBottom: 20,
+  },
+  startBtn: {
+    marginTop: "20%",
   },
 });
