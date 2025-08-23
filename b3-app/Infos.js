@@ -94,13 +94,19 @@ export default function Infos({ navigation }) {
       {/* Logo fictícia B³ */}
       <View style={{ alignItems: "center", marginBottom: 20 }}>
         <Text style={{ color: "white", fontSize: 30, fontWeight: "bold" }}>
-          <Image
-            source={require("./assets/Rectangle.png")}
-            style={{
-              width: "50px",
-              height: "50px",
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Home");
             }}
-          />
+          >
+            <Image
+              source={require("./assets/Rectangle.png")}
+              style={{
+                width: "50px",
+                height: "50px",
+              }}
+            />
+          </TouchableOpacity>
         </Text>
       </View>
 

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { View, Image, Alert } from "react-native";
 import Input from "./components/Input";
 import BlueButton from "./components/BlueButton.js";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
+import ReturnHome from "./components/ReturnHome.js";
 
 function CreateRoom({ navigation }) {
   const [nomeSala, setNomeSala] = useState("");
@@ -42,7 +43,6 @@ function CreateRoom({ navigation }) {
     }
   };
 
-  // Cria sala via API
   const createRoom = async () => {
     console.log(nomeSala);
 
@@ -56,20 +56,40 @@ function CreateRoom({ navigation }) {
       const data = await res.json();
       const code = data.code;
 
-      // Conecta WebSocket
       connectWebSocket(code);
 
-      // Redireciona para tela CopyCode passando o código
-      navigation.navigate("CopyCode", { code });
+      navigation.navigate("CopyCode", { code, nomeSala });
     } catch (err) {
       console.error(err);
       Alert.alert("Erro", "Não foi possível criar a sala.");
     }
   };
 
+  const startQuiz = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/rooms/start", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ code }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao iniciar quiz");
+      }
+
+      Alert.alert("Sucesso", "Quiz iniciado!");
+    } catch (err) {
+      console.error(err);
+      Alert.alert("Erro", "Não foi possível iniciar o quiz.");
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={require("./assets/Rectangle.png")} />
+      <ReturnHome></ReturnHome>
+
       <Input
         label="Nome de usuário"
         value={nomeSala}

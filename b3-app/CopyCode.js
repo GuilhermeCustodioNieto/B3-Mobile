@@ -9,8 +9,9 @@ import {
 } from "react-native";
 import BlueButton from "./components/BlueButton";
 import * as Clipboard from "expo-clipboard";
+import ReturnHome from "./components/ReturnHome";
 
-function CopyCode({ route }) {
+function CopyCode({ navigation, route, nomeSala }) {
   const { code } = route.params; // pega o código da sala
 
   const copyToClipboard = async () => {
@@ -18,13 +19,29 @@ function CopyCode({ route }) {
     Alert.alert("Código copiado!", code);
   };
 
-  function startQuiz() {
-    // Lógica para começar o quiz
-  }
+  const startQuiz = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/rooms/start", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ code }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao iniciar quiz");
+      }
+
+      navigation.navigate("PgQuiz", { code, nomeSala });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={require("./assets/Rectangle.png")} />
+      <ReturnHome />
 
       <Text style={styles.title}>Seu código</Text>
 
@@ -39,11 +56,12 @@ function CopyCode({ route }) {
           />
         </TouchableOpacity>
       </View>
+
       <BlueButton
         text="Começar Quiz"
         onPress={startQuiz}
         style={styles.startBtn}
-      ></BlueButton>
+      />
     </View>
   );
 }
@@ -56,12 +74,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#001629",
     alignItems: "center",
     paddingHorizontal: 20,
-  },
-  logo: {
-    width: 160,
-    height: 160,
-    marginTop: 80,
-    marginBottom: 40,
   },
   copyView: {
     alignItems: "center",
@@ -83,6 +95,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "90%",
     marginTop: "5%",
+    marginBottom: "10%",
   },
   copyIcon: {
     width: 50,
@@ -96,6 +109,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   startBtn: {
-    marginTop: "20%",
+    marginTop: "50px",
   },
 });

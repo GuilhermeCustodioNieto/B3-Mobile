@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { View, Image, TouchableOpacity, Text } from "react-native-web";
 import Input from "./components/Input";
 import BlueButton from "./components/BlueButton.js";
+import ReturnHome from "./components/ReturnHome.js";
 
 function EnterRoom({ navigation }) {
   const [nomeSala, setNomeSala] = useState("");
@@ -10,7 +11,7 @@ function EnterRoom({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={require("./assets/Rectangle.png")} />
+      <ReturnHome></ReturnHome>
       <Input
         label="Nome de usuário"
         value={nomeSala}

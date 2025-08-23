@@ -1,8 +1,10 @@
 import { Image, StyleSheet, Text, View } from "react-native";
+import ReturnHome from "./components/ReturnHome";
 
 export default function Resultado({ text = "", image }) {
   return (
     <View style={styles.container}>
+      <ReturnHome></ReturnHome>
       <Image source={image} style={styles.img} />
 
       <Text style={styles.texto}>{text}</Text>
