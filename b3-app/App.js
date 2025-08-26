@@ -27,7 +27,7 @@ export default function App({ socket }) {
         <Stack.Screen name="CreateRoom" component={CreateRoom} />
         <Stack.Screen name="PaginaQuiz" component={PaginaQuiz} />
         <Stack.Screen name="Resultado" component={Resultado} />
-        <Stack.Screen name="PaginaRank" component={PgRank} />
+        <Stack.Screen name="PgRank" component={PgRank} />
       </Stack.Navigator>
     </NavigationContainer>
   );

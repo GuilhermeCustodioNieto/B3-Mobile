@@ -1,18 +1,18 @@
 import React from "react";
 import {
-  StyleSheet,
   View,
-  Image,
-  TouchableOpacity,
   Text,
+  TouchableOpacity,
+  Image,
   Alert,
+  StyleSheet,
 } from "react-native";
 import BlueButton from "./components/BlueButton";
 import * as Clipboard from "expo-clipboard";
 import ReturnHome from "./components/ReturnHome";
 
-function CopyCode({ navigation, route, nomeSala }) {
-  const { code } = route.params; // pega o código da sala
+function CopyCode({ navigation, route }) {
+  const { code, nomeSala } = route.params;
 
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync(code);
@@ -23,26 +23,23 @@ function CopyCode({ navigation, route, nomeSala }) {
     try {
       const response = await fetch("http://localhost:8080/api/rooms/start", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code }),
       });
 
-      if (!response.ok) {
-        throw new Error("Erro ao iniciar quiz");
-      }
+      if (!response.ok) throw new Error("Erro ao iniciar quiz");
 
-      navigation.navigate("PaginaQuiz", { code, nomeSala });
+      // Navega para a tela do quiz, que vai usar o hook para WS
+      navigation.navigate("PaginaQuiz", { code, username: nomeSala });
     } catch (err) {
       console.error(err);
+      Alert.alert("Erro ao iniciar o quiz");
     }
   };
 
   return (
     <View style={styles.container}>
       <ReturnHome />
-
       <Text style={styles.title}>Seu código</Text>
 
       <View style={styles.copyContainer}>
@@ -57,11 +54,7 @@ function CopyCode({ navigation, route, nomeSala }) {
         </TouchableOpacity>
       </View>
 
-      <BlueButton
-        text="Começar Quiz"
-        onPress={startQuiz}
-        style={styles.startBtn}
-      />
+      <BlueButton text="Começar Quiz" onPress={startQuiz} />
     </View>
   );
 }
@@ -84,11 +77,7 @@ const styles = StyleSheet.create({
     padding: 15,
     width: "70%",
   },
-  copyViewText: {
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "white",
-  },
+  copyViewText: { fontSize: 25, fontWeight: "bold", color: "white" },
   copyContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -97,18 +86,12 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     marginBottom: "10%",
   },
-  copyIcon: {
-    width: 50,
-    height: 50,
-  },
+  copyIcon: { width: 50, height: 50 },
   title: {
     fontSize: 30,
     fontWeight: "bold",
     color: "#fff",
     marginTop: "10%",
     marginBottom: 20,
-  },
-  startBtn: {
-    marginTop: "50px",
   },
 });
