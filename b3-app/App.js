@@ -10,12 +10,14 @@ import CopyCode from "./CopyCode";
 import PaginaQuiz from "./PgQuiz";
 import PgRank from "./PgRank";
 import Resultado from "./Resultado";
+import QuizHandler from "./QuizHandler";
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+export default function App({ socket }) {
   return (
     <NavigationContainer>
+      <QuizHandler socket={socket} />
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Home" component={Home} />

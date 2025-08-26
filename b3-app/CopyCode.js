@@ -33,7 +33,7 @@ function CopyCode({ navigation, route, nomeSala }) {
         throw new Error("Erro ao iniciar quiz");
       }
 
-      navigation.navigate("PgQuiz", { code, nomeSala });
+      navigation.navigate("PaginaQuiz", { code, nomeSala });
     } catch (err) {
       console.error(err);
     }

@@ -65,27 +65,6 @@ function CreateRoom({ navigation }) {
     }
   };
 
-  const startQuiz = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/api/rooms/start", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ code }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Erro ao iniciar quiz");
-      }
-
-      Alert.alert("Sucesso", "Quiz iniciado!");
-    } catch (err) {
-      console.error(err);
-      Alert.alert("Erro", "Não foi possível iniciar o quiz.");
-    }
-  };
-
   return (
     <View style={styles.container}>
       <ReturnHome></ReturnHome>
