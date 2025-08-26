@@ -11,6 +11,7 @@ import PaginaQuiz from "./PgQuiz";
 import PgRank from "./PgRank";
 import Resultado from "./Resultado";
 import QuizHandler from "./QuizHandler";
+import WaitingRoom from "./WaitingRoom";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ export default function App({ socket }) {
         <Stack.Screen name="PaginaQuiz" component={PaginaQuiz} />
         <Stack.Screen name="Resultado" component={Resultado} />
         <Stack.Screen name="PgRank" component={PgRank} />
+        <Stack.Screen name="WaitingRoom" component={WaitingRoom} />
       </Stack.Navigator>
     </NavigationContainer>
   );

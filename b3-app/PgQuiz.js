@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { Button } from "./components/Buttons.js";
 import { useQuizWS } from "./hooks/useQuizWs.js";
@@ -14,18 +14,33 @@ export default function PaginaQuiz({ navigation, route }) {
     finished,
   } = useQuizWS(code, username);
 
-  // Redireciona automaticamente para a tela de ranking
+  const [answered, setAnswered] = useState(false); // controla clicks por questão
+
+  // Resetar answered sempre que a pergunta mudar
+  useEffect(() => {
+    if (question) {
+      setAnswered(false);
+    }
+  }, [question]);
+
+  // Se o quiz terminou, navega para PgRank
   useEffect(() => {
     if (finished) {
-      navigation.replace("PgRank", { scores, code });
+      navigation.replace("PgRank", { code, username });
     }
   }, [finished, navigation, code, username]);
+
+  const handleAnswer = (format) => {
+    if (answered) return; // evita múltiplos clicks
+    sendAnswer(format);
+    setAnswered(true);
+  };
 
   const renderAlternatives = () =>
     question?.alternatives?.map((alt, i) => (
       <Button
         key={i}
-        onPress={() => sendAnswer(alt.format)}
+        onPress={() => handleAnswer(alt.format)}
         text={alt.text}
         image={
           i === 0
@@ -44,7 +59,7 @@ export default function PaginaQuiz({ navigation, route }) {
       {showQuestion && question && (
         <View style={styles.containerTexto}>
           <Text style={styles.texto1}>
-            Questão {Number(question.index) - 1}/{Number(question.total) - 1}
+            Questão {Number(question.index - 1)}/{Number(question.total - 1)}
           </Text>
           <View style={styles.caixa}>
             <Text style={styles.questao}>{question.text}</Text>

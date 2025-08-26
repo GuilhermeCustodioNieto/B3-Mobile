@@ -9,6 +9,7 @@ export function useQuizWS(code, username, API_BASE = "http://localhost:8080") {
   const [showQuestion, setShowQuestion] = useState(false);
   const [showScoreboard, setShowScoreboard] = useState(false);
   const [finished, setFinished] = useState(false);
+  const [players, setPlayers] = useState([]); // Lista de jogadores conectados
 
   const handleEvent = useCallback((event) => {
     switch (event.type) {
@@ -22,14 +23,17 @@ export function useQuizWS(code, username, API_BASE = "http://localhost:8080") {
         setScores(event.scores);
         setShowScoreboard(true);
         setShowQuestion(false);
-
         if (event.finished) {
-          setFinished(true); // indica que o quiz acabou
+          setFinished(true);
         }
         break;
 
       case "PLAYER_JOINNED":
-        console.log("Jogador entrou:", event.username);
+        // Adiciona o jogador à lista
+        setPlayers((prev) => {
+          if (!prev.includes(event.username)) return [...prev, event.username];
+          return prev;
+        });
         break;
 
       default:
@@ -77,5 +81,6 @@ export function useQuizWS(code, username, API_BASE = "http://localhost:8080") {
     showScoreboard,
     sendAnswer,
     finished,
+    players, // agora o hook expõe a lista de jogadores
   };
 }

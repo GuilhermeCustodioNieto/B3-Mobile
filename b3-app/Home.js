@@ -66,11 +66,12 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   button: {
-    backgroundColor: "#1D2945",
     width: "100%",
     paddingVertical: 15,
     marginBottom: 20,
     borderRadius: 5,
+    borderColor: "#007bff",
+    borderWidth: 2,
     alignItems: "center",
   },
   buttonText: {
