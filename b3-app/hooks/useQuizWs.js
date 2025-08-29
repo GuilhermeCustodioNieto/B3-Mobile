@@ -2,7 +2,11 @@ import { useEffect, useState, useCallback } from "react";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
 
-export function useQuizWS(code, username, API_BASE = "http://localhost:8080") {
+export function useQuizWS(
+  code,
+  username,
+  API_BASE = "https://b3-back-end.onrender.com"
+) {
   const [stompClient, setStompClient] = useState(null);
   const [question, setQuestion] = useState(null);
   const [scores, setScores] = useState(null);

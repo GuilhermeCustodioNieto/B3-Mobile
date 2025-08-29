@@ -1,14 +1,30 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 
 export default function Splash({ navigation }) {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.replace("Home");
-    }, 2000);
+  const API_BASE = "https://b3-back-end.onrender.com";
 
-    return () => clearTimeout(timer);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/museum`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        const data = await res.json();
+        console.log("Dados carregados:", data);
+
+        navigation.replace("Home");
+      } catch (err) {
+        console.error("Erro ao carregar dados:", err);
+
+        navigation.replace("Home");
+      }
+    };
+
+    fetchData();
   }, [navigation]);
 
   return (

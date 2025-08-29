@@ -4,7 +4,7 @@ import Input from "./components/Input";
 import BlueButton from "./components/BlueButton.js";
 import ReturnHome from "./components/ReturnHome.js";
 
-const API_BASE = "http://localhost:8080"; // ou sua URL real
+const API_BASE = "https://b3-back-end.onrender.com"; // ou sua URL real
 
 function EnterRoom({ navigation }) {
   const [nomeSala, setNomeSala] = useState("");
@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#00ADEF",
     marginBottom: 40,
-    width: "160px",
-    height: "160px",
+    width: 160,
+    height: 160,
     marginTop: "5rem",
   },
 });

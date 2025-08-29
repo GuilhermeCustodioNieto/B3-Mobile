@@ -6,7 +6,7 @@ import ReturnHome from "./components/ReturnHome.js";
 
 function CreateRoom({ navigation }) {
   const [nomeSala, setNomeSala] = useState("");
-  const API_BASE = "http://localhost:8080";
+  const API_BASE = "https://b3-back-end.onrender.com";
 
   const createRoom = async () => {
     if (!nomeSala) return Alert.alert("Erro", "Digite seu nome!");

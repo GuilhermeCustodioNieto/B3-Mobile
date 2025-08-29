@@ -24,7 +24,11 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: "#0478DD",
     borderStyle: "solid",
-    boxShadow: " 0px 0px 75px #12304bff",
+    shadowColor: "#12304b",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.7,
+    shadowRadius: 20,
+    elevation: 15,
   },
 
   caixa: {

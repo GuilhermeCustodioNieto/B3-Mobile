@@ -102,8 +102,8 @@ export default function Infos({ navigation }) {
             <Image
               source={require("./assets/Rectangle.png")}
               style={{
-                width: "50px",
-                height: "50px",
+                width: 50,
+                height: 50,
               }}
             />
           </TouchableOpacity>

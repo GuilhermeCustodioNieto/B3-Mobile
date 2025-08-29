@@ -21,11 +21,14 @@ function CopyCode({ navigation, route }) {
 
   const startQuiz = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/rooms/start", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code }),
-      });
+      const response = await fetch(
+        "https://b3-back-end.onrender.com/api/rooms/start",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code }),
+        }
+      );
 
       if (!response.ok) throw new Error("Erro ao iniciar quiz");
 
